@@ -2,145 +2,192 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Ada Sesuatu Buat Kamu</title>
 
 <style>
 
 *{
-  box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(#020207,#07162f,#000);
-  overflow:hidden;
-  font-family:Georgia, serif;
-  color:white;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(#010107,#06152f,#000);
+overflow:hidden;
+font-family:Georgia,serif;
+color:white;
 }
 
 
 .container{
-  text-align:center;
+text-align:center;
 }
 
 
 h1{
-  font-size:24px;
-  margin-bottom:45px;
-  font-weight:normal;
+font-size:24px;
+font-weight:normal;
+margin-bottom:60px;
 }
 
 
-/* KADO */
+/* KADO 3D */
 
 .gift{
-  position:relative;
-  width:150px;
-  height:110px;
-  background:#080808;
-  margin:auto;
-  cursor:pointer;
-  border-radius:5px;
-  box-shadow:0 15px 30px rgba(0,0,0,.8);
+position:relative;
+width:170px;
+height:150px;
+margin:auto;
+cursor:pointer;
+transform-style:preserve-3d;
+animation:float 3s infinite ease-in-out;
 }
 
 
-.gift:before{
-  content:"";
-  position:absolute;
-  width:25px;
-  height:110px;
-  background:#09234a;
-  left:62px;
+.box{
+position:absolute;
+width:170px;
+height:150px;
+background:#050505;
+border-radius:8px;
+box-shadow:20px 20px 40px #000;
 }
 
 
-.gift:after{
-  content:"";
-  position:absolute;
-  width:150px;
-  height:25px;
-  background:#09234a;
-  top:42px;
-  left:0;
+/* sisi kanan */
+
+.box:after{
+content:"";
+position:absolute;
+right:-25px;
+top:15px;
+width:25px;
+height:135px;
+background:#111;
+transform:skewY(-45deg);
 }
 
 
-/* pita kecil */
+/* tutup */
 
-.ribbon{
-  position:absolute;
-  width:45px;
-  height:20px;
-  background:#0b2d60;
-  top:35px;
-  left:52px;
-  border-radius:20px;
+.lid{
+position:absolute;
+top:-25px;
+left:0;
+width:170px;
+height:35px;
+background:#090909;
+border-radius:8px;
+transition:1s;
+z-index:3;
 }
 
 
-/* AMPLOP */
+/* pita */
+
+.ribbon1{
+position:absolute;
+left:70px;
+top:-25px;
+width:30px;
+height:175px;
+background:#092b61;
+z-index:4;
+}
+
+
+.ribbon2{
+position:absolute;
+top:45px;
+width:170px;
+height:35px;
+background:#092b61;
+z-index:4;
+}
+
+
+/* animasi */
+
+@keyframes float{
+50%{
+transform:translateY(-10px);
+}
+}
+
+
+.open .lid{
+transform:translateY(-100px) rotateX(40deg);
+}
+
+
+.open{
+animation:shake .5s;
+}
+
+
+@keyframes shake{
+25%{transform:rotate(5deg);}
+50%{transform:rotate(-5deg);}
+75%{transform:rotate(5deg);}
+}
+
+
+/* amplop */
+
 
 .envelope{
-  display:none;
-  position:relative;
-  width:220px;
-  height:140px;
-  background:white;
-  margin:auto;
-  cursor:pointer;
-  border-radius:8px;
-  box-shadow:0 15px 30px rgba(0,0,0,.5);
+display:none;
+width:220px;
+height:140px;
+background:white;
+border-radius:8px;
+margin:auto;
+position:relative;
+box-shadow:0 20px 40px black;
+cursor:pointer;
+animation:show 1s;
 }
 
 
 .envelope:before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  border-left:110px solid transparent;
-  border-right:110px solid transparent;
-  border-top:75px solid #eaeaea;
+content:"";
+position:absolute;
+top:0;
+left:0;
+border-left:110px solid transparent;
+border-right:110px solid transparent;
+border-top:80px solid #e8e8e8;
 }
 
-
-/* SURAT */
 
 .letter{
-  display:none;
-  width:260px;
-  min-height:300px;
-  background:#d8b98b;
-  color:#25180d;
-  padding:30px;
-  margin:auto;
-  border-radius:5px;
-  box-shadow:0 15px 30px rgba(0,0,0,.6);
-  line-height:1.6;
-  animation:open .8s;
+display:none;
+width:280px;
+background:#d6b486;
+color:#25170c;
+padding:30px;
+border-radius:5px;
+box-shadow:0 20px 40px black;
+animation:show 1s;
 }
 
 
-@keyframes open{
+@keyframes show{
 from{
-transform:translateY(40px);
 opacity:0;
+transform:translateY(40px);
 }
 to{
-transform:translateY(0);
 opacity:1;
+transform:translateY(0);
 }
 }
 
-
-.show{
-display:block;
-}
 
 </style>
 
@@ -152,54 +199,83 @@ display:block;
 
 <div class="container">
 
-<h1 id="title">
+
+<h1 id="text">
 Ada sesuatu buat kamu...
 </h1>
 
 
-<div class="gift" onclick="openGift()">
-<div class="ribbon"></div>
+<div class="gift" onclick="openGift()" id="gift">
+
+<div class="box"></div>
+
+<div class="lid"></div>
+
+<div class="ribbon1"></div>
+
+<div class="ribbon2"></div>
+
 </div>
 
 
-<div class="envelope" onclick="openLetter()">
+
+<div class="envelope" onclick="openLetter()" id="envelope">
+
 </div>
 
 
-<div class="letter">
+
+<div class="letter" id="letter">
+
 <h3>Untuk Kamu 🤍</h3>
+
 <p>
-Aku membuat sesuatu kecil ini khusus buat kamu.
-Semoga kamu selalu semangat dan tahu kalau kamu berharga.
+Aku membuat sesuatu kecil ini khusus buat kamu.<br><br>
+Semoga kamu selalu semangat,
+dan jangan lupa kalau kamu sangat berarti.
 </p>
-</div>
-
 
 </div>
 
+
+
+</div>
 
 
 <script>
 
+
 function openGift(){
 
-document.querySelector(".gift").style.display="none";
+let gift=document.getElementById("gift");
 
-document.querySelector("#title").innerHTML=
+gift.classList.add("open");
+
+
+setTimeout(()=>{
+
+gift.style.display="none";
+
+document.getElementById("text").innerHTML=
 "Sebuah surat untuk kamu...";
 
-document.querySelector(".envelope").style.display="block";
+document.getElementById("envelope").style.display="block";
+
+},1200);
+
 
 }
+
 
 
 function openLetter(){
 
-document.querySelector(".envelope").style.display="none";
+document.getElementById("envelope").style.display="none";
 
-document.querySelector(".letter").style.display="block";
+document.getElementById("letter").style.display="block";
 
 }
+
 
 </script>
 
