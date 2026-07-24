@@ -17,8 +17,7 @@ body{
 margin:0;
 height:100vh;
 overflow:hidden;
-background:
-radial-gradient(circle at top,#102957,#020207 60%);
+background:linear-gradient(#020207,#071b3d,#000);
 font-family:Georgia,serif;
 color:white;
 }
@@ -32,14 +31,14 @@ width:3px;
 height:3px;
 background:white;
 border-radius:50%;
-box-shadow:0 0 10px white;
-animation:fall linear infinite;
+box-shadow:0 0 12px white;
+animation:jatuh linear infinite;
 }
 
 
-@keyframes fall{
+@keyframes jatuh{
 
-0%{
+from{
 transform:translateY(-20px) translateX(0);
 opacity:0;
 }
@@ -48,13 +47,12 @@ opacity:0;
 opacity:1;
 }
 
-100%{
-transform:translateY(100vh) translateX(80px);
+to{
+transform:translateY(100vh) translateX(100px);
 opacity:0;
 }
 
 }
-
 
 
 /* TOMBOL */
@@ -68,46 +66,35 @@ transform:translate(-50%,-50%);
 
 padding:15px 45px;
 
-border-radius:30px;
-
-border:2px solid #b9d7ff;
-
 background:#071a38;
 
-color:white;
+border:2px solid #8bbcff;
+
+border-radius:40px;
 
 font-size:25px;
 
 cursor:pointer;
 
-box-shadow:0 0 20px #123c80;
+box-shadow:0 0 25px #163e80;
 
 }
 
 
 
-/* AREA CHAT */
-
+/* TEMPAT CHAT */
 
 .chat-area{
 
 position:absolute;
 
-bottom:-10px;
-
+top:50%;
 left:50%;
 
-transform:translateX(-50%);
+transform:translate(-50%,-50%);
 
-width:90%;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-gap:18px;
+width:100%;
+height:100%;
 
 }
 
@@ -115,61 +102,87 @@ gap:18px;
 
 /* BUBBLE */
 
-
 .chat{
 
-max-width:85%;
+position:absolute;
+
+left:50%;
+top:50%;
+
+transform:translate(-50%,-50%) scale(0);
 
 background:#0b2858;
 
-border:1px solid #4169a1;
+border:1px solid #426aa5;
+
+color:white;
 
 padding:14px 22px;
 
-border-radius:25px;
+border-radius:30px;
 
-font-size:15px;
+max-width:75%;
 
 text-align:center;
 
+font-size:15px;
+
 box-shadow:
-0 8px 20px rgba(0,0,0,.6),
-inset 0 0 15px #153d78;
+0 10px 25px black,
+inset 0 0 15px #163d78;
 
 
-animation:move 9s linear forwards;
+animation:
+pecah .8s forwards,
+melayang 4s ease-in-out infinite;
 
 }
 
 
 
-@keyframes move{
+/* keluar dari tengah */
 
+@keyframes pecah{
 
-0%{
+from{
 
-transform:translateY(100px);
+transform:
+translate(-50%,-50%)
+scale(0);
 
 opacity:0;
 
 }
 
 
-15%{
+to{
+
+transform:
+translate(var(--x),var(--y))
+scale(1);
 
 opacity:1;
 
 }
 
-
-100%{
-
-transform:translateY(-750px);
-
-opacity:0;
-
 }
 
+
+
+/* gerak setelah menyebar */
+
+@keyframes melayang{
+
+0%,100%{
+
+margin-top:0;
+}
+
+50%{
+
+margin-top:-25px;
+
+}
 
 }
 
@@ -190,33 +203,29 @@ Tekan
 
 
 
-<div class="chat-area" id="chatArea">
+<div class="chat-area" id="chatArea"></div>
 
-</div>
 
 
 
 <script>
 
 
-// membuat bintang jatuh
+// bintang
 
-for(let i=0;i<35;i++){
+for(let i=0;i<40;i++){
 
 let star=document.createElement("div");
 
 star.className="star";
-
 
 star.style.left=Math.random()*100+"%";
 
 star.style.animationDuration=
 (2+Math.random()*4)+"s";
 
-
 star.style.animationDelay=
 Math.random()*5+"s";
-
 
 document.body.appendChild(star);
 
@@ -273,15 +282,32 @@ let chat=document.createElement("div");
 
 chat.className="chat";
 
-
 chat.innerHTML=isi;
+
+
+
+// posisi menyebar dari tengah
+
+let arah=index%2==0 ? 1 : -1;
+
+
+let x=arah*(80 + (index*35));
+
+let y=-150 + (index*35);
+
+
+
+chat.style.setProperty("--x",x+"px");
+
+chat.style.setProperty("--y",y+"px");
+
 
 
 area.appendChild(chat);
 
 
 
-},index*900);
+},index*300);
 
 
 
@@ -294,7 +320,6 @@ area.appendChild(chat);
 
 
 </script>
-
 
 
 </body>
