@@ -103,38 +103,58 @@ pointer-events:none;
 /* BUBBLE */
 
 .chat{
-
 position:absolute;
 
-left:50%;
-top:50%;
-
-transform:translate(-50%,-50%) scale(0);
-
 background:#0b2858;
-
 border:1px solid #426aa5;
 
 color:white;
 
-padding:14px 22px;
+padding:14px 18px;
 
-border-radius:30px;
+border-radius:25px;
 
-max-width:75%;
+max-width:42%;
 
 text-align:center;
 
-font-size:15px;
+font-size:14px;
 
 box-shadow:
-0 10px 25px black,
+0 8px 20px black,
 inset 0 0 15px #163d78;
 
-
 animation:
-pecah .8s forwards,
-melayang 4s ease-in-out infinite;
+muncul .8s forwards,
+ngambang 4s ease-in-out infinite;
+
+opacity:0;
+}
+
+
+@keyframes muncul{
+
+from{
+transform:translate(-50%,-50%) scale(0);
+}
+
+to{
+transform:translate(0,0) scale(1);
+opacity:1;
+}
+
+}
+
+
+@keyframes ngambang{
+
+0%,100%{
+margin-top:0;
+}
+
+50%{
+margin-top:-25px;
+}
 
 }
 
@@ -291,9 +311,32 @@ chat.innerHTML=isi;
 let arah=index%2==0 ? 1 : -1;
 
 
-let x=arah*(80 + (index*35));
+let kiri = index < 5;
 
-let y=-150 + (index*35);
+let posisiX;
+
+if(kiri){
+
+posisiX = -150 - (index*10);
+
+}else{
+
+posisiX = 50 + ((index-5)*10);
+
+}
+
+
+let posisiY = -180 + ((index%5)*90);
+
+
+chat.style.left="50%";
+chat.style.top="50%";
+
+chat.style.setProperty("--x",posisiX+"px");
+chat.style.setProperty("--y",posisiY+"px");
+
+chat.style.transform=
+`translate(${posisiX}px,${posisiY}px)`;
 
 
 
