@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ada Sesuatu Buat Kamu</title>
+<title>Something For You</title>
 
 <style>
 
@@ -17,7 +17,7 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(#020207,#071a38,#000);
+background:radial-gradient(circle,#102957,#020207 70%);
 overflow:hidden;
 font-family:Georgia,serif;
 color:white;
@@ -32,102 +32,130 @@ text-align:center;
 h1{
 font-weight:normal;
 font-size:24px;
-margin-bottom:60px;
+margin-bottom:70px;
 }
 
 
-/* KADO */
+/* AREA KADO */
+
+.scene{
+perspective:900px;
+}
+
 
 .gift{
-position:relative;
 width:180px;
-height:170px;
-margin:auto;
+height:180px;
+position:relative;
+transform-style:preserve-3d;
 cursor:pointer;
-perspective:600px;
 animation:float 3s infinite;
 }
 
 
-.box-front{
+/* badan depan */
+
+.front{
 position:absolute;
 width:180px;
 height:150px;
-background:#050505;
 bottom:0;
-border-radius:5px;
-box-shadow:inset -15px 0 25px #111,
-0 20px 40px black;
+background:#050505;
+border:1px solid #151515;
+transform:translateZ(40px);
+box-shadow:inset 0 0 25px #222;
 }
 
 
-.box-side{
+/* sisi kanan */
+
+.right{
 position:absolute;
-width:45px;
+width:80px;
 height:150px;
-right:-45px;
+right:-40px;
 bottom:0;
 background:#101010;
-transform:skewY(-45deg);
+transform:rotateY(60deg) translateZ(40px);
 transform-origin:left;
 }
 
 
-.lid{
+/* bagian atas kotak */
+
+.top{
 position:absolute;
 width:180px;
+height:80px;
+top:0;
+background:#090909;
+transform:rotateX(70deg) translateZ(40px);
+transform-origin:bottom;
+}
+
+
+/* tutup */
+
+.lid{
+position:absolute;
+width:190px;
 height:35px;
-top:10px;
-left:0;
+top:-15px;
+left:-5px;
 background:#080808;
-border-radius:5px;
-z-index:5;
+transform:translateZ(60px);
 transition:1s;
+z-index:5;
 box-shadow:0 10px 20px black;
 }
 
 
-/* PITA */
+/* pita vertikal */
 
-.ribbon-vertical{
+.ribbon-v{
 position:absolute;
 width:32px;
-height:160px;
-background:#092b61;
+height:155px;
+background:#08285b;
 left:74px;
 bottom:0;
-z-index:3;
+z-index:4;
+transform:translateZ(45px);
 }
 
 
-.ribbon-horizontal{
+/* pita horizontal */
+
+.ribbon-h{
 position:absolute;
 width:180px;
 height:32px;
-background:#092b61;
-top:70px;
-z-index:3;
+top:65px;
+background:#08285b;
+z-index:4;
+transform:translateZ(50px);
 }
 
 
-/* simpul */
+/* pita atas */
 
 .bow{
 position:absolute;
-width:45px;
-height:25px;
-background:#103878;
-top:-10px;
-left:68px;
+width:55px;
+height:35px;
+background:#0d397c;
+top:-35px;
+left:63px;
 border-radius:50%;
-z-index:7;
+z-index:8;
+transform:translateZ(80px);
 }
 
 
 /* buka */
 
 .open .lid{
-transform:translateY(-130px) rotateX(35deg);
+transform:translateY(-120px) rotateX(45deg);
 }
 
 
@@ -137,48 +165,38 @@ animation:shake .5s;
 
 
 @keyframes shake{
-
-25%{transform:rotate(5deg);}
-50%{transform:rotate(-5deg);}
-75%{transform:rotate(5deg);}
-
+25%{rotate:5deg;}
+50%{rotate:-5deg;}
+75%{rotate:5deg;}
 }
 
 
 @keyframes float{
-
 50%{
 transform:translateY(-12px);
 }
-
 }
+
 
 
 /* GLITTER */
 
-.sparkle{
+.star{
 position:absolute;
-width:7px;
-height:7px;
+width:6px;
+height:6px;
 background:white;
 border-radius:50%;
-box-shadow:0 0 10px white;
+box-shadow:0 0 12px white;
 animation:fly 1.5s forwards;
 }
 
 
 @keyframes fly{
-
-from{
-transform:translate(0,0);
-opacity:1;
-}
-
 to{
 transform:translate(var(--x),var(--y));
 opacity:0;
 }
-
 }
 
 
@@ -186,103 +204,65 @@ opacity:0;
 /* AMPLOP */
 
 .envelope{
-
 display:none;
 width:230px;
 height:150px;
 background:white;
 margin:auto;
-position:relative;
 border-radius:8px;
 box-shadow:0 20px 40px black;
 cursor:pointer;
-animation:appear 1s;
-}
-
-
-.envelope:before{
-
-content:"";
-position:absolute;
-top:0;
-left:0;
-
-border-left:115px solid transparent;
-border-right:115px solid transparent;
-border-top:85px solid #e8e8e8;
-
 }
 
 
 /* SURAT */
 
 .letter{
-
 display:none;
 width:280px;
-background:#d7b98a;
-color:#24160b;
 padding:30px;
+background:#d8bb8e;
+color:#23170c;
 border-radius:5px;
-box-shadow:0 20px 40px black;
-animation:appear 1s;
-
 }
 
-
-@keyframes appear{
-
-from{
-opacity:0;
-transform:translateY(50px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
 
 </style>
 
 </head>
-
 
 <body>
 
 
 <div class="container">
 
-
-<h1 id="title">
+<h1 id="text">
 Ada sesuatu buat kamu...
 </h1>
 
 
+<div class="scene">
 
 <div class="gift" id="gift" onclick="openGift()">
 
-<div class="box-front"></div>
-
-<div class="box-side"></div>
+<div class="front"></div>
+<div class="right"></div>
+<div class="top"></div>
 
 <div class="lid"></div>
 
-<div class="ribbon-vertical"></div>
-
-<div class="ribbon-horizontal"></div>
+<div class="ribbon-v"></div>
+<div class="ribbon-h"></div>
 
 <div class="bow"></div>
 
 </div>
 
+</div>
 
 
 <div class="envelope" id="envelope" onclick="openLetter()">
-
 </div>
-
 
 
 <div class="letter" id="letter">
@@ -290,9 +270,8 @@ Ada sesuatu buat kamu...
 <h3>Untuk Kamu 🤍</h3>
 
 <p>
-Aku membuat sesuatu kecil ini khusus buat kamu.<br><br>
-Semoga kamu selalu kuat dan semangat.
-Aku selalu percaya sama kamu.
+Aku membuat sesuatu kecil ini khusus buat kamu.
+Semoga kamu selalu semangat.
 </p>
 
 </div>
@@ -313,45 +292,36 @@ gift.classList.add("open");
 
 // glitter banyak
 
-for(let i=0;i<45;i++){
+for(let i=0;i<60;i++){
 
-let star=document.createElement("div");
+let s=document.createElement("div");
 
-star.className="sparkle";
+s.className="star";
 
-star.style.left="85px";
-star.style.top="50px";
+s.style.left="90px";
+s.style.top="60px";
 
-star.style.setProperty("--x",
-(Math.random()*300-150)+"px");
+s.style.setProperty("--x",
+(Math.random()*400-200)+"px");
 
-star.style.setProperty("--y",
-(-Math.random()*300)+"px");
-
-
-gift.appendChild(star);
+s.style.setProperty("--y",
+(-Math.random()*350)+"px");
 
 
-setTimeout(()=>{
-star.remove();
-},1600);
+gift.appendChild(s);
 
 }
-
-
 
 setTimeout(()=>{
 
 gift.style.display="none";
 
-document.getElementById("title").innerHTML=
+document.getElementById("text").innerHTML=
 "Sebuah surat untuk kamu...";
 
 document.getElementById("envelope").style.display="block";
 
-
-},1500);
-
+},1700);
 
 }
 
