@@ -5,91 +5,204 @@
 <title>Ada Sesuatu Buat Kamu</title>
 
 <style>
+
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   height:100vh;
-  background:linear-gradient(#02020a,#07152e,#000);
   display:flex;
   justify-content:center;
   align-items:center;
+  background:linear-gradient(#020207,#07162f,#000);
+  overflow:hidden;
+  font-family:Georgia, serif;
   color:white;
-  font-family:serif;
 }
+
 
 .container{
   text-align:center;
 }
 
+
 h1{
   font-size:24px;
-  margin-bottom:40px;
+  margin-bottom:45px;
+  font-weight:normal;
 }
 
+
+/* KADO */
+
 .gift{
-  font-size:90px;
+  position:relative;
+  width:150px;
+  height:110px;
+  background:#080808;
+  margin:auto;
   cursor:pointer;
-  transition:0.5s;
+  border-radius:5px;
+  box-shadow:0 15px 30px rgba(0,0,0,.8);
 }
+
+
+.gift:before{
+  content:"";
+  position:absolute;
+  width:25px;
+  height:110px;
+  background:#09234a;
+  left:62px;
+}
+
+
+.gift:after{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:25px;
+  background:#09234a;
+  top:42px;
+  left:0;
+}
+
+
+/* pita kecil */
+
+.ribbon{
+  position:absolute;
+  width:45px;
+  height:20px;
+  background:#0b2d60;
+  top:35px;
+  left:52px;
+  border-radius:20px;
+}
+
+
+/* AMPLOP */
 
 .envelope{
   display:none;
-  font-size:90px;
+  position:relative;
+  width:220px;
+  height:140px;
+  background:white;
+  margin:auto;
   cursor:pointer;
+  border-radius:8px;
+  box-shadow:0 15px 30px rgba(0,0,0,.5);
 }
+
+
+.envelope:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  border-left:110px solid transparent;
+  border-right:110px solid transparent;
+  border-top:75px solid #eaeaea;
+}
+
+
+/* SURAT */
 
 .letter{
   display:none;
-  background:#fff;
-  color:#111;
-  padding:25px;
-  width:250px;
-  border-radius:15px;
+  width:260px;
+  min-height:300px;
+  background:#d8b98b;
+  color:#25180d;
+  padding:30px;
+  margin:auto;
+  border-radius:5px;
+  box-shadow:0 15px 30px rgba(0,0,0,.6);
+  line-height:1.6;
+  animation:open .8s;
 }
 
-.show{
-  display:block;
+
+@keyframes open{
+from{
+transform:translateY(40px);
+opacity:0;
 }
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+
+.show{
+display:block;
+}
+
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
-<h1>Ada sesuatu buat kamu...</h1>
+<h1 id="title">
+Ada sesuatu buat kamu...
+</h1>
 
-<div class="gift" onclick="giftOpen()">
-🎁
+
+<div class="gift" onclick="openGift()">
+<div class="ribbon"></div>
 </div>
 
-<div class="envelope" onclick="letterOpen()">
-💌
+
+<div class="envelope" onclick="openLetter()">
 </div>
+
 
 <div class="letter">
+<h3>Untuk Kamu 🤍</h3>
 <p>
-Hai kamu 🤍<br><br>
 Aku membuat sesuatu kecil ini khusus buat kamu.
+Semoga kamu selalu semangat dan tahu kalau kamu berharga.
 </p>
 </div>
 
+
 </div>
+
 
 
 <script>
 
-function giftOpen(){
+function openGift(){
+
 document.querySelector(".gift").style.display="none";
+
+document.querySelector("#title").innerHTML=
+"Sebuah surat untuk kamu...";
+
 document.querySelector(".envelope").style.display="block";
+
 }
 
-function letterOpen(){
+
+function openLetter(){
+
 document.querySelector(".envelope").style.display="none";
+
 document.querySelector(".letter").style.display="block";
+
 }
 
 </script>
+
 
 </body>
 </html>
