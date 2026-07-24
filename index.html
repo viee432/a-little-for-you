@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ada Sesuatu Buat Kamu</title>
 
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(#02020a,#07152e,#000);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-family:serif;
+}
+
+.container{
+  text-align:center;
+}
+
+h1{
+  font-size:24px;
+  margin-bottom:40px;
+}
+
+.gift{
+  font-size:90px;
+  cursor:pointer;
+  transition:0.5s;
+}
+
+.envelope{
+  display:none;
+  font-size:90px;
+  cursor:pointer;
+}
+
+.letter{
+  display:none;
+  background:#fff;
+  color:#111;
+  padding:25px;
+  width:250px;
+  border-radius:15px;
+}
+
+.show{
+  display:block;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Ada sesuatu buat kamu...</h1>
+
+<div class="gift" onclick="giftOpen()">
+🎁
+</div>
+
+<div class="envelope" onclick="letterOpen()">
+💌
+</div>
+
+<div class="letter">
+<p>
+Hai kamu 🤍<br><br>
+Aku membuat sesuatu kecil ini khusus buat kamu.
+</p>
+</div>
+
+</div>
+
+
+<script>
+
+function giftOpen(){
+document.querySelector(".gift").style.display="none";
+document.querySelector(".envelope").style.display="block";
+}
+
+function letterOpen(){
+document.querySelector(".envelope").style.display="none";
+document.querySelector(".letter").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
