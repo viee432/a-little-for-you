@@ -17,7 +17,7 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(#010107,#06152f,#000);
+background:linear-gradient(#020207,#071a38,#000);
 overflow:hidden;
 font-family:Georgia,serif;
 color:white;
@@ -30,98 +30,104 @@ text-align:center;
 
 
 h1{
-font-size:24px;
 font-weight:normal;
+font-size:24px;
 margin-bottom:60px;
 }
 
 
-/* KADO 3D */
+/* KADO */
 
 .gift{
 position:relative;
-width:170px;
-height:150px;
+width:180px;
+height:170px;
 margin:auto;
 cursor:pointer;
-transform-style:preserve-3d;
-animation:float 3s infinite ease-in-out;
+perspective:600px;
+animation:float 3s infinite;
 }
 
 
-.box{
+.box-front{
 position:absolute;
-width:170px;
+width:180px;
 height:150px;
 background:#050505;
-border-radius:8px;
-box-shadow:20px 20px 40px #000;
+bottom:0;
+border-radius:5px;
+box-shadow:inset -15px 0 25px #111,
+0 20px 40px black;
 }
 
 
-/* sisi kanan */
-
-.box:after{
-content:"";
+.box-side{
 position:absolute;
-right:-25px;
-top:15px;
-width:25px;
-height:135px;
-background:#111;
+width:45px;
+height:150px;
+right:-45px;
+bottom:0;
+background:#101010;
 transform:skewY(-45deg);
+transform-origin:left;
 }
 
-
-/* tutup */
 
 .lid{
 position:absolute;
-top:-25px;
-left:0;
-width:170px;
+width:180px;
 height:35px;
-background:#090909;
-border-radius:8px;
+top:10px;
+left:0;
+background:#080808;
+border-radius:5px;
+z-index:5;
 transition:1s;
+box-shadow:0 10px 20px black;
+}
+
+
+/* PITA */
+
+.ribbon-vertical{
+position:absolute;
+width:32px;
+height:160px;
+background:#092b61;
+left:74px;
+bottom:0;
 z-index:3;
 }
 
 
-/* pita */
-
-.ribbon1{
+.ribbon-horizontal{
 position:absolute;
-left:70px;
-top:-25px;
-width:30px;
-height:175px;
+width:180px;
+height:32px;
 background:#092b61;
-z-index:4;
+top:70px;
+z-index:3;
 }
 
 
-.ribbon2{
+/* simpul */
+
+.bow{
 position:absolute;
-top:45px;
-width:170px;
-height:35px;
-background:#092b61;
-z-index:4;
+width:45px;
+height:25px;
+background:#103878;
+top:-10px;
+left:68px;
+border-radius:50%;
+z-index:7;
 }
 
 
-/* animasi */
-
-@keyframes float{
-50%{
-transform:translateY(-10px);
-}
-}
-
+/* buka */
 
 .open .lid{
-transform:translateY(-100px) rotateX(40deg);
+transform:translateY(-130px) rotateX(35deg);
 }
 
 
@@ -131,63 +137,112 @@ animation:shake .5s;
 
 
 @keyframes shake{
+
 25%{transform:rotate(5deg);}
 50%{transform:rotate(-5deg);}
 75%{transform:rotate(5deg);}
+
 }
 
 
-/* amplop */
+@keyframes float{
 
+50%{
+transform:translateY(-12px);
+}
+
+}
+
+
+/* GLITTER */
+
+.sparkle{
+position:absolute;
+width:7px;
+height:7px;
+background:white;
+border-radius:50%;
+box-shadow:0 0 10px white;
+animation:fly 1.5s forwards;
+}
+
+
+@keyframes fly{
+
+from{
+transform:translate(0,0);
+opacity:1;
+}
+
+to{
+transform:translate(var(--x),var(--y));
+opacity:0;
+}
+
+}
+
+
+
+/* AMPLOP */
 
 .envelope{
+
 display:none;
-width:220px;
-height:140px;
+width:230px;
+height:150px;
 background:white;
-border-radius:8px;
 margin:auto;
 position:relative;
+border-radius:8px;
 box-shadow:0 20px 40px black;
 cursor:pointer;
-animation:show 1s;
+animation:appear 1s;
 }
 
 
 .envelope:before{
+
 content:"";
 position:absolute;
 top:0;
 left:0;
-border-left:110px solid transparent;
-border-right:110px solid transparent;
-border-top:80px solid #e8e8e8;
+
+border-left:115px solid transparent;
+border-right:115px solid transparent;
+border-top:85px solid #e8e8e8;
+
 }
 
 
+/* SURAT */
+
 .letter{
+
 display:none;
 width:280px;
-background:#d6b486;
-color:#25170c;
+background:#d7b98a;
+color:#24160b;
 padding:30px;
 border-radius:5px;
 box-shadow:0 20px 40px black;
-animation:show 1s;
+animation:appear 1s;
+
 }
 
 
-@keyframes show{
+@keyframes appear{
+
 from{
 opacity:0;
-transform:translateY(40px);
+transform:translateY(50px);
 }
+
 to{
 opacity:1;
 transform:translateY(0);
 }
-}
 
+}
 
 </style>
 
@@ -200,26 +255,31 @@ transform:translateY(0);
 <div class="container">
 
 
-<h1 id="text">
+<h1 id="title">
 Ada sesuatu buat kamu...
 </h1>
 
 
-<div class="gift" onclick="openGift()" id="gift">
 
-<div class="box"></div>
+<div class="gift" id="gift" onclick="openGift()">
+
+<div class="box-front"></div>
+
+<div class="box-side"></div>
 
 <div class="lid"></div>
 
-<div class="ribbon1"></div>
+<div class="ribbon-vertical"></div>
 
-<div class="ribbon2"></div>
+<div class="ribbon-horizontal"></div>
+
+<div class="bow"></div>
 
 </div>
 
 
 
-<div class="envelope" onclick="openLetter()" id="envelope">
+<div class="envelope" id="envelope" onclick="openLetter()">
 
 </div>
 
@@ -231,12 +291,11 @@ Ada sesuatu buat kamu...
 
 <p>
 Aku membuat sesuatu kecil ini khusus buat kamu.<br><br>
-Semoga kamu selalu semangat,
-dan jangan lupa kalau kamu sangat berarti.
+Semoga kamu selalu kuat dan semangat.
+Aku selalu percaya sama kamu.
 </p>
 
 </div>
-
 
 
 </div>
@@ -252,16 +311,46 @@ let gift=document.getElementById("gift");
 gift.classList.add("open");
 
 
+// glitter banyak
+
+for(let i=0;i<45;i++){
+
+let star=document.createElement("div");
+
+star.className="sparkle";
+
+star.style.left="85px";
+star.style.top="50px";
+
+star.style.setProperty("--x",
+(Math.random()*300-150)+"px");
+
+star.style.setProperty("--y",
+(-Math.random()*300)+"px");
+
+
+gift.appendChild(star);
+
+
+setTimeout(()=>{
+star.remove();
+},1600);
+
+}
+
+
+
 setTimeout(()=>{
 
 gift.style.display="none";
 
-document.getElementById("text").innerHTML=
+document.getElementById("title").innerHTML=
 "Sebuah surat untuk kamu...";
 
 document.getElementById("envelope").style.display="block";
 
-},1200);
+
+},1500);
 
 
 }
