@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Something For You</title>
+<title>For You</title>
 
 <style>
 
@@ -11,332 +12,289 @@
 box-sizing:border-box;
 }
 
+
 body{
 margin:0;
 height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:radial-gradient(circle,#102957,#020207 70%);
 overflow:hidden;
+background:
+radial-gradient(circle at top,#102957,#020207 60%);
 font-family:Georgia,serif;
 color:white;
 }
 
 
-.container{
-text-align:center;
-}
-
-
-h1{
-font-weight:normal;
-font-size:24px;
-margin-bottom:70px;
-}
-
-
-/* AREA KADO */
-
-.scene{
-perspective:900px;
-}
-
-
-.gift{
-width:180px;
-height:180px;
-position:relative;
-transform-style:preserve-3d;
-cursor:pointer;
-animation:float 3s infinite;
-}
-
-
-/* badan depan */
-
-.front{
-position:absolute;
-width:180px;
-height:150px;
-bottom:0;
-background:#050505;
-border:1px solid #151515;
-transform:translateZ(40px);
-box-shadow:inset 0 0 25px #222;
-}
-
-
-/* sisi kanan */
-
-.right{
-position:absolute;
-width:80px;
-height:150px;
-right:-40px;
-bottom:0;
-background:#101010;
-transform:rotateY(60deg) translateZ(40px);
-transform-origin:left;
-}
-
-
-/* bagian atas kotak */
-
-.top{
-position:absolute;
-width:180px;
-height:80px;
-top:0;
-background:#090909;
-transform:rotateX(70deg) translateZ(40px);
-transform-origin:bottom;
-}
-
-
-/* tutup */
-
-.lid{
-position:absolute;
-width:190px;
-height:35px;
-top:-15px;
-left:-5px;
-background:#080808;
-transform:translateZ(60px);
-transition:1s;
-z-index:5;
-box-shadow:0 10px 20px black;
-}
-
-
-/* pita vertikal */
-
-.ribbon-v{
-position:absolute;
-width:32px;
-height:155px;
-background:#08285b;
-left:74px;
-bottom:0;
-z-index:4;
-transform:translateZ(45px);
-}
-
-
-/* pita horizontal */
-
-.ribbon-h{
-position:absolute;
-width:180px;
-height:32px;
-top:65px;
-background:#08285b;
-z-index:4;
-transform:translateZ(50px);
-}
-
-
-/* pita atas */
-
-.bow{
-position:absolute;
-width:55px;
-height:35px;
-background:#0d397c;
-top:-35px;
-left:63px;
-border-radius:50%;
-z-index:8;
-transform:translateZ(80px);
-}
-
-
-/* buka */
-
-.open .lid{
-transform:translateY(-120px) rotateX(45deg);
-}
-
-
-.open{
-animation:shake .5s;
-}
-
-
-@keyframes shake{
-25%{rotate:5deg;}
-50%{rotate:-5deg;}
-75%{rotate:5deg;}
-}
-
-
-@keyframes float{
-50%{
-transform:translateY(-12px);
-}
-}
-
-
-
-/* GLITTER */
+/* BINTANG JATUH */
 
 .star{
 position:absolute;
-width:6px;
-height:6px;
+width:3px;
+height:3px;
 background:white;
 border-radius:50%;
-box-shadow:0 0 12px white;
-animation:fly 1.5s forwards;
+box-shadow:0 0 10px white;
+animation:fall linear infinite;
 }
 
 
-@keyframes fly{
-to{
-transform:translate(var(--x),var(--y));
+@keyframes fall{
+
+0%{
+transform:translateY(-20px) translateX(0);
 opacity:0;
 }
+
+20%{
+opacity:1;
+}
+
+100%{
+transform:translateY(100vh) translateX(80px);
+opacity:0;
+}
+
 }
 
 
 
-/* AMPLOP */
+/* TOMBOL */
 
-.envelope{
-display:none;
-width:230px;
-height:150px;
-background:white;
-margin:auto;
-border-radius:8px;
-box-shadow:0 20px 40px black;
+#button{
+
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+
+padding:15px 45px;
+
+border-radius:30px;
+
+border:2px solid #b9d7ff;
+
+background:#071a38;
+
+color:white;
+
+font-size:25px;
+
 cursor:pointer;
+
+box-shadow:0 0 20px #123c80;
+
 }
 
 
-/* SURAT */
 
-.letter{
-display:none;
-width:280px;
-padding:30px;
-background:#d8bb8e;
-color:#23170c;
-border-radius:5px;
+/* AREA CHAT */
+
+
+.chat-area{
+
+position:absolute;
+
+bottom:-10px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:90%;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:18px;
+
 }
+
+
+
+/* BUBBLE */
+
+
+.chat{
+
+max-width:85%;
+
+background:#0b2858;
+
+border:1px solid #4169a1;
+
+padding:14px 22px;
+
+border-radius:25px;
+
+font-size:15px;
+
+text-align:center;
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.6),
+inset 0 0 15px #153d78;
+
+
+animation:move 9s linear forwards;
+
+}
+
+
+
+@keyframes move{
+
+
+0%{
+
+transform:translateY(100px);
+
+opacity:0;
+
+}
+
+
+15%{
+
+opacity:1;
+
+}
+
+
+100%{
+
+transform:translateY(-750px);
+
+opacity:0;
+
+}
+
+
+}
+
 
 
 </style>
 
 </head>
 
+
 <body>
 
 
-<div class="container">
 
-<h1 id="text">
-Ada sesuatu buat kamu...
-</h1>
-
-
-<div class="scene">
-
-<div class="gift" id="gift" onclick="openGift()">
-
-<div class="front"></div>
-<div class="right"></div>
-<div class="top"></div>
-
-<div class="lid"></div>
-
-<div class="ribbon-v"></div>
-<div class="ribbon-h"></div>
-
-<div class="bow"></div>
-
-</div>
-
+<div id="button" onclick="mulai()">
+Tekan
 </div>
 
 
-<div class="envelope" id="envelope" onclick="openLetter()">
-</div>
 
-
-<div class="letter" id="letter">
-
-<h3>Untuk Kamu 🤍</h3>
-
-<p>
-Aku membuat sesuatu kecil ini khusus buat kamu.
-Semoga kamu selalu semangat.
-</p>
+<div class="chat-area" id="chatArea">
 
 </div>
 
-
-</div>
 
 
 <script>
 
 
-function openGift(){
+// membuat bintang jatuh
 
-let gift=document.getElementById("gift");
+for(let i=0;i<35;i++){
 
-gift.classList.add("open");
+let star=document.createElement("div");
 
-
-// glitter banyak
-
-for(let i=0;i<60;i++){
-
-let s=document.createElement("div");
-
-s.className="star";
-
-s.style.left="90px";
-s.style.top="60px";
-
-s.style.setProperty("--x",
-(Math.random()*400-200)+"px");
-
-s.style.setProperty("--y",
-(-Math.random()*350)+"px");
+star.className="star";
 
 
-gift.appendChild(s);
+star.style.left=Math.random()*100+"%";
+
+star.style.animationDuration=
+(2+Math.random()*4)+"s";
+
+
+star.style.animationDelay=
+Math.random()*5+"s";
+
+
+document.body.appendChild(star);
 
 }
+
+
+
+
+let pesan=[
+
+"aku bangga sama kamuu sayangg 🤍",
+
+"semangatt yaa sayangnya aku",
+
+"love youu sayanggg ❤️",
+
+"sehat selalu yaa sayangg",
+
+"terima kasihh buat semuanya sayang",
+
+"maaf yaa kalo aku buat masalah terus",
+
+"intinya aku sayang kamu 🤍",
+
+"semoga impian kamu tercapai",
+
+"aku bakal dukung kamu terus",
+
+"cepat sembuh yaa sayangku cintaku gantengkuu"
+
+];
+
+
+
+
+function mulai(){
+
+
+document.getElementById("button").style.display="none";
+
+
+let area=document.getElementById("chatArea");
+
+
+
+pesan.forEach((isi,index)=>{
+
 
 setTimeout(()=>{
 
-gift.style.display="none";
 
-document.getElementById("text").innerHTML=
-"Sebuah surat untuk kamu...";
+let chat=document.createElement("div");
 
-document.getElementById("envelope").style.display="block";
 
-},1700);
+chat.className="chat";
+
+
+chat.innerHTML=isi;
+
+
+area.appendChild(chat);
+
+
+
+},index*900);
+
+
+
+});
+
+
 
 }
 
-
-
-function openLetter(){
-
-document.getElementById("envelope").style.display="none";
-
-document.getElementById("letter").style.display="block";
-
-}
 
 
 </script>
+
 
 
 </body>
