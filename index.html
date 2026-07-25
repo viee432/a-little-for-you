@@ -103,45 +103,26 @@ pointer-events:none;
 /* BUBBLE */
 
 .chat{
+
 position:absolute;
 
+width:42%;
+
 background:#0b2858;
-border:1px solid #426aa5;
 
-color:white;
+border:1px solid #4169a1;
 
-padding:14px 18px;
+padding:14px;
 
 border-radius:25px;
 
-max-width:42%;
+font-size:14px;
 
 text-align:center;
 
-font-size:14px;
+box-shadow:0 8px 20px black;
 
-box-shadow:
-0 8px 20px black,
-inset 0 0 15px #163d78;
-
-animation:
-muncul .8s forwards,
-ngambang 4s ease-in-out infinite;
-
-opacity:0;
-}
-
-
-@keyframes muncul{
-
-from{
-transform:translate(-50%,-50%) scale(0);
-}
-
-to{
-transform:translate(0,0) scale(1);
-opacity:1;
-}
+animation:ngambang 4s ease-in-out infinite;
 
 }
 
@@ -149,11 +130,11 @@ opacity:1;
 @keyframes ngambang{
 
 0%,100%{
-margin-top:0;
+transform:translateY(0);
 }
 
 50%{
-margin-top:-25px;
+transform:translateY(-25px);
 }
 
 }
@@ -283,26 +264,49 @@ let pesan=[
 
 function mulai(){
 
-
 document.getElementById("button").style.display="none";
-
 
 let area=document.getElementById("chatArea");
 
 
-
 pesan.forEach((isi,index)=>{
-
 
 setTimeout(()=>{
 
-
 let chat=document.createElement("div");
-
 
 chat.className="chat";
 
 chat.innerHTML=isi;
+
+
+// 5 kiri 5 kanan
+
+if(index < 5){
+
+chat.style.left="5%";
+
+chat.style.top=(15 + index*15)+"%";
+
+}else{
+
+chat.style.left="53%";
+
+chat.style.top=(15 + (index-5)*15)+"%";
+
+}
+
+
+area.appendChild(chat);
+
+
+}, index*500);
+
+
+});
+
+
+}
 
 
 
